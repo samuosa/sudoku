@@ -1,39 +1,170 @@
+//define cell width variable
+$cell-size: 40px;
+$font-size: 20px;
+
+$highlight-1: #e2e2e2;
+$highlight-2: #d8d8d8;
+$highlight-3: #c4c4c4;
+
+$highlight-4: #656464;
+$highlight-5: #767676;
+
+$highlight-font: #2ea540;
+
+$primary: #000000;
+$secondary: #0263c4;
+$note-color: #393939;
+
+@keyframes blink {
+  0% {
+    background-color: $highlight-4;
+  }
+  50% {
+    background-color: $highlight-5;
+  }
+  100% {
+    background-color: $highlight-4;
+  }
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #0281ff;
   margin-top: 60px;
+  font-size: $font-size;
 }
-.field{
-  table{
+.fieldContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.field {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  position: relative;
+
+  .input,
+  .notes,
+  .prefilled {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+  }
+
+  .input {
+    z-index: 3;
+  }
+
+  .notes {
+    z-index: 2;
+    .noteContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    td.note {
+      color: $note-color;
+      font-size: $font-size / 2;
+      width: $cell-size / 4;
+      height: $cell-size / 4;
+      text-align: center;
+      line-height: $cell-size / 4;
+      background-color: transparent;
+      text-overflow: ellipsis;
+      box-sizing: border-box;
+    }
+    td.selectedNumber {
+      color: $highlight-font;
+      font-weight: bold;
+    }
+  }
+
+  .prefilled {
+    z-index: 1;
+  }
+
+  table {
     border-collapse: collapse;
     text-indent: initial;
     border-spacing: 0px;
+    table-layout: fixed;
 
-    td{
+    td {
       margin: 0px;
-      input{
-        width: 15px;
-        height: 15px;
+      padding: 0px;
+      color: $primary;
+      overflow: hidden;
+      white-space: nowrap;
+
+      input {
+        width: $cell-size;
+        height: $cell-size;
         border: none;
         text-align: center;
+        box-sizing: border-box;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
-    tr{
+    tr {
       margin: 0px;
     }
-    .cell{
+    .cell {
       border: solid black 1px;
-      width: 15px;
-      height: 15px;
+      width: $cell-size;
+      height: $cell-size;
     }
-    .highlight{
-      background-color: #b1b1b1;
+    td.input {
+      color: $secondary;
     }
-    .selected{
-      background-color: #797979;
+    .cell.top {
+      border-top: solid black 2px;
+    }
+    .cell.bottom {
+      border-bottom: solid black 2px;
+    }
+    .cell.left {
+      border-left: solid black 2px;
+    }
+    .cell.right {
+      border-right: solid black 2px;
+    }
+    .highlight {
+      background-color: $highlight-1;
+    }
+    .cell.selectedBox {
+      background-color: $highlight-2;
+    }
+    .cell.selected {
+      background-color: $highlight-3;
+      color: white;
+    }
+    .cell.invalid {
+      background-color: red;
+      color: white;
+    }
+    .cell.selectedNumber {
+      color: $highlight-font;
+      font-weight: bold;
+      background-color: $highlight-2;
+    }
+    td.edit {
+      color: white;
+      animation: blink 1s infinite;
     }
   }
- }
+  .inputs {
+    td {
+      user-select: none;
+      cursor: pointer;
+    }
+    td:hover {
+      background-color: $highlight-1;
+      color: $secondary;
+    }
+  }
+}
