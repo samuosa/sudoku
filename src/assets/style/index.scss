@@ -1,0 +1,39 @@
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+.field{
+  table{
+    border-collapse: collapse;
+    text-indent: initial;
+    border-spacing: 0px;
+
+    td{
+      margin: 0px;
+      input{
+        width: 15px;
+        height: 15px;
+        border: none;
+        text-align: center;
+      }
+    }
+    tr{
+      margin: 0px;
+    }
+    .cell{
+      border: solid black 1px;
+      width: 15px;
+      height: 15px;
+    }
+    .highlight{
+      background-color: #b1b1b1;
+    }
+    .selected{
+      background-color: #797979;
+    }
+  }
+ }
