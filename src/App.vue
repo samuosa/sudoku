@@ -1,53 +1,56 @@
 <template>
-  <div class="field">
-    <div class="input">
-      <table @mouseleave="setSelected(9, 9)">
-        <tr v-for="(row, rowIndex) in grid" :key="rowIndex" :class="{ highlight: rowIndex == selected[0] }">
-          <td class="cell" v-for="(col, colIndex) in row" :key="colIndex"
-            :class="{ highlight: colIndex == selected[1], selected: rowIndex == selected[0] && colIndex == selected[1] }"
-            @mouseover="setSelected(rowIndex, colIndex)">
-            <span v-if="col != 0">
-              {{ col }}
-            </span>
-            <span v-else>
-            </span>
-          </td>
-        </tr>
-      </table>
-    </div>
+  <div class="fieldContainer">
 
-    <div class="notes">
-      <table @mouseleave="setSelected(9, 9)">
-        <tr v-for="(row, rowIndex) in grid" :key="rowIndex" :class="{ highlight: rowIndex == selected[0] }">
-          <td class="cell" v-for="(col, colIndex) in row" :key="colIndex"
-            :class="{ highlight: colIndex == selected[1], selected: rowIndex == selected[0] && colIndex == selected[1] }"
-            @mouseover="setSelected(rowIndex, colIndex)">
-            <span v-if="col != 0">
-              
-            </span>
-            <input type="text" v-else/>
-          </td>
-        </tr>
-      </table>
+    <div class="field">
+      <div class="input">
+        <table @mouseleave="setSelected(9, 9)">
+          <tr v-for="(row, rowIndex) in grid" :key="rowIndex" :class="{ highlight: rowIndex == selected[0] }">
+            <td class="cell" v-for="(col, colIndex) in row" :key="colIndex"
+              :class="{ highlight: colIndex == selected[1], selected: rowIndex == selected[0] && colIndex == selected[1] }"
+              @mouseover="setSelected(rowIndex, colIndex)">
+              <span v-if="col != 0">
+                {{ col }}
+              </span>
+              <span v-else>
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+  
+      <div class="notes">
+        <table @mouseleave="setSelected(9, 9)">
+          <tr v-for="(row, rowIndex) in grid" :key="rowIndex" :class="{ highlight: rowIndex == selected[0] }">
+            <td class="cell" v-for="(col, colIndex) in row" :key="colIndex"
+              :class="{ highlight: colIndex == selected[1], selected: rowIndex == selected[0] && colIndex == selected[1] }"
+              @mouseover="setSelected(rowIndex, colIndex)">
+              <span v-if="col != 0">
+                
+              </span>
+              <input type="text" v-else/>
+            </td>
+          </tr>
+        </table>
+      </div>
+  
+      <div class="prefilled">
+        <table @mouseleave="setSelected(9, 9)">
+          <tr v-for="(row, rowIndex) in grid" :key="rowIndex" :class="{ highlight: rowIndex == selected[0] }">
+            <td class="cell" v-for="(col, colIndex) in row" :key="colIndex"
+              :class="{ highlight: colIndex == selected[1], selected: rowIndex == selected[0] && colIndex == selected[1] }"
+              @mouseover="setSelected(rowIndex, colIndex)">
+              <span v-if="col != 0">
+                {{ col }}
+              </span>
+              <span v-else>
+              </span>
+            </td>
+          </tr>
+        </table>
+  
+      </div>
+      <button @click="updateGrid">Change Value</button>
     </div>
-
-    <div class="prefilled">
-      <table @mouseleave="setSelected(9, 9)">
-        <tr v-for="(row, rowIndex) in grid" :key="rowIndex" :class="{ highlight: rowIndex == selected[0] }">
-          <td class="cell" v-for="(col, colIndex) in row" :key="colIndex"
-            :class="{ highlight: colIndex == selected[1], selected: rowIndex == selected[0] && colIndex == selected[1] }"
-            @mouseover="setSelected(rowIndex, colIndex)">
-            <span v-if="col != 0">
-              {{ col }}
-            </span>
-            <span v-else>
-            </span>
-          </td>
-        </tr>
-      </table>
-
-    </div>
-    <button @click="updateGrid">Change Value</button>
   </div>
 </template>
 
