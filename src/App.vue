@@ -2,7 +2,7 @@
   <FieldWrapper :input="input"/>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import FieldWrapper from './FieldWrapper.vue'
 const input=[
   [0, 0, 6, 0, 0, 0, 0, 7, 0],
