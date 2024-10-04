@@ -1,5 +1,5 @@
 import { ref, Ref } from 'vue';
-import { validateBasic, fillNotes, compareNotes } from '../utils/utils';
+import { validateBasic, fillNotes, compareNotes, add1OptionsNotes } from '../utils/utils';
 import { Tripel, Tupel } from '../assets/types';
 
 export function SudokuState(input: number[][]) {
@@ -40,6 +40,7 @@ const addNotes = () => {
     compareNotes(notes.value, value, (value: number[][][]) =>{
       notes.value = value;
     });
+    add1OptionsNotes(numbers, notes.value);
   });
 }
 const setNoteNumber = (number:number, row:number, col:number) => {

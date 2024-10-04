@@ -1,3 +1,5 @@
+import { Ref } from "vue";
+
 export const validateMatrix = (matrix:number[][]) => {
   if (!Array.isArray(matrix) || matrix.length !== 9) {
     return false;
@@ -162,3 +164,64 @@ export const add2OptionsNotes = (numbers:number [][], callback:(value:number[][]
   callback(notes);
 }
  */
+export const add1OptionsNotes = (numbers:Ref<number [][]>, fullNotes: number[][][]) => {
+
+  for (let row = 0; row < 9; row++) {
+    for (let col = 0; col < 9; col++) {
+      if (numbers.value[row][col] == 0) {
+        for (let i = 1; i <= 9; i++) {
+          if (!findInRow(numbers.value, row, i) && !findInCol(numbers.value, col, i) && !findInBox(numbers.value, row, col, i)) {
+            if(findNumberInNotesBox(fullNotes, i, row, col) == 1 || findNumberInNotesRow(fullNotes, i, row) == 1 || findNumberInNotesCol(fullNotes, i, col) == 1){
+              numbers.value[row][col]=i;
+              break;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+const findNumberInNotesBox = (notes:number[][][], number:number,row:number, col:number):number => {
+  let hits = 0;
+  const boxRow = Math.floor(row / 3) * 3;
+  const boxCol = Math.floor(col / 3) * 3;
+  for (let i = boxRow; i < boxRow + 3; i++) {
+    for (let j = boxCol; j < boxCol + 3; j++) {
+      if (notes[i][j].includes(number)) {
+        hits++;
+      }
+    }
+  }
+  return hits;
+}
+const findNumberInNotesRow = (notes:number[][][], number:number,row:number):number => {
+  let hits = 0;
+  for (let i = 0; i < 9; i++) {
+    if (notes[row][i].includes(number)) {
+      hits++;
+    }
+  }
+  return hits;
+}
+const findNumberInNotesCol = (notes:number[][][], number:number,col:number):number => {
+  let hits = 0;
+  for (let i = 0; i < 9; i++) {
+    if (notes[i][col].includes(number)) {
+      hits++;
+    }
+  }
+  return hits;
+}
+
+/* const checkNotesBoxVertical = (numbers:number[][], row:number, col:number, value:number):boolean => {
+  const boxRow = Math.floor(row / 3) * 3;
+  const boxCol = Math.floor(col / 3) * 3;
+  for (let i = boxRow; i < boxRow + 3; i++) {
+    for (let j = boxCol; j < boxCol + 3; j++) {
+      if (i != row && j != col && numbers[i][j] == value) {
+        return true;
+      }
+    }
+  }
+  return false;
+} */
